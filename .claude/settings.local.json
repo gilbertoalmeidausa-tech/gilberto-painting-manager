@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(run)",
+      "PowerShell(node -e \"require\\('playwright'\\)\" 2>&1; npx playwright --version 2>&1 | Select-Object -First 3)",
+      "PowerShell(Get-Command *)",
+      "PowerShell($git = \"C:\\\\Program Files\\\\Git\\\\cmd\\\\git.exe\"; cd \"C:\\\\Users\\\\gilbe\\\\Documents\\\\gilberto-painting-manager\"; & $git status 2>&1 | Select-Object -First 10)"
+    ]
+  }
+}
