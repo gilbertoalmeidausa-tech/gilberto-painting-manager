@@ -41,7 +41,8 @@ export async function apiFetch<T = unknown>(
     headers.set('Authorization', `Bearer ${accessToken}`)
   }
 
-  const res = await fetch(path, {
+  const base = import.meta.env.VITE_API_URL ?? ''
+  const res = await fetch(`${base}${path}`, {
     ...init,
     headers,
     credentials: 'include', // send httpOnly cookie for refresh token
