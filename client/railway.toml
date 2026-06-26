@@ -1,5 +1,8 @@
+[build]
+buildCommand = "pnpm --filter @painting/shared build && pnpm --filter @painting/client build"
+
 [deploy]
-startCommand = "vite preview --host 0.0.0.0 --port $PORT"
+startCommand = "pnpm --filter @painting/client start"
 healthcheckPath = "/"
 healthcheckTimeout = 60
 restartPolicyType = "ON_FAILURE"
