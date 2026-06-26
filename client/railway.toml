@@ -1,8 +1,8 @@
 [build]
-buildCommand = "cd .. && pnpm install --frozen-lockfile && pnpm --filter @painting/shared build && pnpm --filter @painting/client build"
+builder = "DOCKERFILE"
+dockerfilePath = "client.Dockerfile"
 
 [deploy]
-startCommand = "pnpm start"
 healthcheckPath = "/"
 healthcheckTimeout = 60
 restartPolicyType = "ON_FAILURE"
