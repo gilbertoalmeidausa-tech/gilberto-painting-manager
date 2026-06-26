@@ -1,0 +1,5 @@
+[phases.install]
+cmds = ["npm install -g pnpm@9 && cd .. && pnpm install --frozen-lockfile"]
+
+[phases.build]
+cmds = ["cd .. && pnpm --filter @painting/shared build && pnpm --filter @painting/client build"]

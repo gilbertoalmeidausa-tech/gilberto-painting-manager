@@ -1,6 +1,3 @@
-[build]
-buildCommand = "npm install -g pnpm@9 && cd .. && pnpm install --frozen-lockfile && pnpm --filter @painting/shared build && pnpm --filter @painting/client build"
-
 [deploy]
 startCommand = "vite preview --host 0.0.0.0 --port $PORT"
 healthcheckPath = "/"
