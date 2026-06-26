@@ -78,11 +78,13 @@ app.get('/health', (c) =>
 
 // ─── Production: serve React SPA ─────────────────────────────────────────────
 if (env.NODE_ENV === 'production') {
+  // __dirname = /app/server/dist → ../../client/dist = /app/client/dist
+  const clientDist = join(__dirname, '..', '..', 'client', 'dist')
   let indexHtml = ''
   try {
-    indexHtml = readFileSync(join(process.cwd(), 'client', 'dist', 'index.html'), 'utf-8')
+    indexHtml = readFileSync(join(clientDist, 'index.html'), 'utf-8')
   } catch { /* not built */ }
-  app.use('/*', serveStatic({ root: './client/dist' }))
+  app.use('/*', serveStatic({ root: clientDist }))
   app.get('/*', (c) => c.html(indexHtml))
 }
 
