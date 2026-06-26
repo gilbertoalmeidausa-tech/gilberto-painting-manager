@@ -2,7 +2,7 @@
 buildCommand = "pnpm --filter @painting/shared build && pnpm --filter @painting/client build"
 
 [deploy]
-startCommand = "npx serve -s client/dist -l $PORT"
+startCommand = "pnpm --filter @painting/client start"
 healthcheckPath = "/"
 healthcheckTimeout = 60
 restartPolicyType = "ON_FAILURE"

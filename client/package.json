@@ -5,7 +5,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start": "vite preview --host 0.0.0.0 --port $PORT",
+    "start": "serve -s dist -l $PORT",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext .ts,.tsx --report-unused-disable-directives --max-warnings 0",
     "test": "vitest run",
@@ -13,6 +13,7 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "serve": "^14.2.3",
     "@hookform/resolvers": "^3.6.0",
     "@painting/shared": "workspace:*",
     "@react-pdf/renderer": "^3.4.4",
