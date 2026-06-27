@@ -91,3 +91,39 @@ Proposals, contracts, and invoices each have an `@react-pdf/renderer` template i
 ## Environment
 
 Copy `.env.example` → `.env` at project root. Server loads it via `dotenv` with `path: '../.env'`.
+
+## Git Manager Protocol (Claude Code role)
+
+Claude Code acts as Git manager for this repo. GLM-5.2 also contributes. **Never commit directly to `master`.**
+
+### Branch Map
+| Branch | Owner | Purpose |
+|---|---|---|
+| `master` | Protected | Stable production — Railway deploys from here |
+| `glm-dev` | GLM-5.2 | All GLM changes land here |
+| `claude-review` | Claude Code | Review, fixes, then merge to master |
+
+### Workflow — every task starts with:
+```bash
+git fetch --all
+git pull origin <current-branch>
+```
+
+### Merging GLM changes (run in order):
+```bash
+git checkout claude-review
+git merge glm-dev                  # review conflicts here
+pnpm typecheck                     # must pass
+pnpm build                         # must pass
+# if all green:
+git checkout master
+git merge claude-review
+git push origin master
+# deploy to Railway only after push succeeds
+```
+
+### Rules
+- If `pnpm typecheck` or `pnpm build` fails → fix on `claude-review`, never force-merge
+- If a conflict cannot be resolved safely → stop and explain; do NOT guess
+- Never overwrite working code without a backup commit first
+- Railway deploy only after `master` is stable and pushed
