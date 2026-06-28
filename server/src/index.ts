@@ -85,7 +85,11 @@ if (env.NODE_ENV === 'production') {
     indexHtml = readFileSync(join(clientDist, 'index.html'), 'utf-8')
   } catch { /* not built */ }
   app.use('/*', serveStatic({ root: clientDist }))
-  app.get('/*', (c) => c.html(indexHtml))
+  // SPA fallback — but never swallow unmatched API routes; let them 404 as JSON
+  app.get('/*', (c) => {
+    if (c.req.path.startsWith('/api/')) return c.json({ error: 'Not found' }, 404)
+    return c.html(indexHtml)
+  })
 }
 
 // ─── 404 / Error handlers ─────────────────────────────────────────────────────
